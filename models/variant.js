@@ -3,6 +3,10 @@ const { WATERMARK } = require('../constants/products');
 
 const variantSchema = new Schema(
   {
+    isPopular: {
+      type: Boolean,
+      default: false,
+    },
     color: {
       type: String,
       default: '',
@@ -45,6 +49,7 @@ const variantSchema = new Schema(
     product: {
       type: Schema.Types.ObjectId,
       ref: 'product',
+      required: true,
     },
   },
   {

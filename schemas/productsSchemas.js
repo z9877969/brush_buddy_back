@@ -2,7 +2,7 @@ const Joi = require('joi');
 const { isValidObjectId } = require('mongoose');
 const { products } = require('../constants');
 
-const { AGE, USER_TYPE, WATERMARK } = products;
+const { AGE, USER_TYPE } = products;
 
 // Схема для об'єкта з полями title і list
 const itemsWithTitleSchema = Joi.object({
@@ -80,9 +80,9 @@ const productUpdatingSchema = Joi.object({
   age: Joi.array()
     .items(Joi.string().valid(AGE['0TO3'], AGE['4TO6'], AGE['6TO12']))
     .default([]),
-  images: Joi.array()
-    .items(Joi.object({ url: Joi.string() }))
-    .default([]),
+  // images: Joi.array()
+  //   .items(Joi.object({ url: Joi.string() }))
+  //   .default([]),
 });
 
 module.exports = {

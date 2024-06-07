@@ -41,7 +41,42 @@ const updateVariant = async (req, res, next) => {
       new: true,
       projection: { createdAt: 0, updatedAt: 0 },
     });
+    if (!variant) {
+      throw createError(404, 'Variant not found');
+    }
     res.status(200).json(variant);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateVariantsPopularity = async (req, res, next) => {
+  try {
+    const { id } = params;
+    const { isPopular } = req.body;
+    const variant = await Variant.findByIdAndUpdate(
+      id,
+      { isPopular },
+      {
+        new: true,
+      }
+    );
+    if (!variant) {
+      throw createError(404, 'Variant not found');
+    }
+    res.json(variant);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getPopularVariants = async (req, res, next) => {
+  try {
+    const variants = await Variant.find(
+      { isPopular: true },
+      '-createdAt -updatedAt'
+    ).populate('product');
+    res.json(variants);
   } catch (error) {
     next(error);
   }
@@ -50,10 +85,9 @@ const updateVariant = async (req, res, next) => {
 const deleteVariant = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const variant = await Variant.findByIdAndDelete(
-      id,
-      {select: '-updatedAt -createdAt'}
-    );
+    const variant = await Variant.findByIdAndDelete(id, {
+      select: '-updatedAt -createdAt',
+    });
     res.status(200).json(variant);
   } catch (error) {
     next(error);
@@ -106,4 +140,6 @@ module.exports = {
   updateVariant,
   deleteVariant,
   updateVariantImages,
+  updateVariantsPopularity,
+  getPopularVariants,
 };

@@ -60,10 +60,6 @@ const productSchema = new Schema(
       default: [],
       required: false,
     },
-    images: {
-      type: Array,
-      default: []
-    },
   },
   {
     versionKey: false,
