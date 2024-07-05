@@ -80,6 +80,26 @@ const getProductVariantsList = async (req, res, next) => {
   }
 };
 
+const getPopularProducts = async (req, res, next) => {
+  try {
+    const variants = await Variant.find(
+      { isPopular: true },
+      '-createdAt -updatedAt'
+    ).populate('product');
+
+    const normalizedProducts = variants.map(
+      ({ _doc: { product, ...variant } }) => ({
+        ...product._doc,
+        variants: [variant],
+      })
+    );
+
+    res.json(normalizedProducts);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
@@ -87,4 +107,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductVariantsList,
+  getPopularProducts,
 };

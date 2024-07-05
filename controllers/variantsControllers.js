@@ -70,18 +70,6 @@ const updateVariantsPopularity = async (req, res, next) => {
   }
 };
 
-const getPopularVariants = async (req, res, next) => {
-  try {
-    const variants = await Variant.find(
-      { isPopular: true },
-      '-createdAt -updatedAt'
-    ).populate('product');
-    res.json(variants);
-  } catch (error) {
-    next(error);
-  }
-};
-
 const deleteVariant = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -141,5 +129,4 @@ module.exports = {
   deleteVariant,
   updateVariantImages,
   updateVariantsPopularity,
-  getPopularVariants,
 };

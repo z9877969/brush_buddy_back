@@ -49,12 +49,6 @@ const variantsRouter = createRouter({
     },
     {
       method: 'get',
-      route: '/popular',
-      middlewares: null,
-      controller: c.getPopularVariants,
-    },
-    {
-      method: 'get',
       route: '/:id',
       middlewares: [isValidId],
       controller: c.getVariantById,

@@ -3,16 +3,22 @@ const { productsControllers: c } = require('../../controllers');
 const {
   productsSchemas: { productAddingSchema, productUpdatingSchema },
 } = require('../../schemas');
-const { isValidId, upload } = require('../../middlewares');
+const { isValidId } = require('../../middlewares');
 
 const productsRouter = createRouter({
-  //   `defaultMiddlewares: null,`
+  //   defaultMiddlewares: null,
   options: [
     {
       method: 'get',
       route: '/',
       middlewares: null,
       controller: c.getAllProducts,
+    },
+    {
+      method: 'get',
+      route: '/popular',
+      middlewares: null,
+      controller: c.getPopularProducts,
     },
     {
       method: 'get',
