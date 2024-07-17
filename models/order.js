@@ -16,16 +16,19 @@ const orderSchema = new Schema(
         },
         color: {
           type: String,
-          required: true,
+          required: false,
+          default: '',
         },
         flavor: {
           type: String,
-          required: true,
+          required: false,
+          default: '',
         },
         volume: {
           type: String,
-          match: /^[1-9]{1}[0-9]{0,4}$/,
-          required: true,
+          // match: /^[1-9]{1}[0-9]{0,4}[]$/,
+          required: false,
+          default: '',
         },
         amount: {
           type: Number,
@@ -41,7 +44,7 @@ const orderSchema = new Schema(
         }, // 'Product salePrice',
       },
     ],
-    orderSum: {
+    totalPrice: {
       type: Number,
       required: true,
     }, // order total sum
@@ -83,7 +86,7 @@ const orderSchema = new Schema(
         default: 'No comment',
       }, // 'some user comment',
     },
-    paymentMethod: {
+    payment: {
       type: String,
       enum: ['card', 'cash'],
       required: true,
@@ -93,6 +96,11 @@ const orderSchema = new Schema(
       enum: ['success', 'processing'],
       required: false,
       default: 'processing',
+    },
+    invoiceId: {
+      type: String,
+      required: false,
+      default: '',
     },
   },
   {
@@ -106,3 +114,31 @@ orderSchema.pre('findByIdAndUpdate', function () {
 });
 
 module.exports.Order = model('order', orderSchema);
+
+// в orderData покласти всі поля з body
+// const orderData = {
+//   products: [
+//     {
+//       title: 'Product title',
+//       color: 'Product color',
+//       flavor: 'Product flavor',
+//       volume: '50',
+//       amount: 2,
+//       price: 100,
+//       salePrice: 0,
+//     },
+//   ],
+//   totalPrice: 500, // order total sum
+//   promocode: 'Xh5jhGO2',
+//   discount: 10,
+//   discountedOrerSum: 0,
+//   delivery: {
+//     phone: 'User phone',
+//     name: 'User full name',
+//     city: 'delivery city',
+//     postOffice: 'delivery post office',
+//     comments: 'some user comment',
+//   },
+//   // paymentMethod: 'cash', // ['card', 'cash']
+//   paymentMethod: 'card', // ['card', 'cash']
+// };

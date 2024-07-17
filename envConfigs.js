@@ -9,4 +9,5 @@ module.exports = {
   MONOBANK_CALLBACK_URL: process.env.MONOBANK_CALLBACK_URL,
   MONOBANK_RESPONSE_URL: process.env.MONOBANK_RESPONSE_URL,
   FRONTEND_URL: process.env.FRONTEND_URL,
+  BACKEND_URL: process.env.BACKEND_URL,
 };

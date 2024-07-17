@@ -5,14 +5,14 @@ const instance = axios.create({
   baseURL: `https://api.telegram.org/bot${TG_BOT_TOKEN}`,
 });
 
-const sendMessageTg = async (orderData) => {
+const sendMessageTg = async (message) => {
   const { data } = await instance.post('/sendMessage', {
     chat_id: TG_CHAT_ID,
     parse_mode: 'html',
-    text: createTgMessage(orderData),
+    text: message,
   });
 
-  return { ...data, orderNum: orderData.orderNum };
+  return data;
 };
 
 module.exports = {
