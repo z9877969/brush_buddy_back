@@ -5,6 +5,7 @@ const productsControllers = require('./productsControllers');
 const variantsControllers = require('./variantsControllers');
 const filtersControllers = require('./filtersControllers');
 const blogsControllers = require('./blogsControllers');
+const contentControllers = require('./contentControllers');
 
 module.exports = {
   promocodeControllers,
@@ -14,4 +15,5 @@ module.exports = {
   variantsControllers,
   filtersControllers,
   blogsControllers,
+  contentControllers,
 };
