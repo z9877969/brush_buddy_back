@@ -9,18 +9,10 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    subtitle: {
-      type: String,
-      required: true,
-    },
     description: {
       type: Array,
       required: false,
       default: [],
-    },
-    recomendation: {
-      type: String,
-      required: true,
     },
     category: {
       type: Schema.Types.ObjectId,
@@ -71,9 +63,7 @@ module.exports.Product = model('product', productSchema);
 
 const p = {
   title: '+',
-  subtitle: '+',
   description: [],
-  recomendation: '+',
   category: {
     type: Schema.Types.ObjectId,
     ref: 'category',
