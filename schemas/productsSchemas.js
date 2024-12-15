@@ -19,11 +19,9 @@ const paragraphSchema = Joi.object({
 
 const productAddingSchema = Joi.object({
   title: Joi.string().required(),
-  subtitle: Joi.string().required(),
   description: Joi.array().items(
     Joi.alternatives().try(itemsWithTitleSchema, paragraphSchema)
   ),
-  recomendation: Joi.string().required(),
   category: Joi.string()
     .custom((value, helpers) => {
       if (!isValidObjectId(value)) {
@@ -55,11 +53,9 @@ const productAddingSchema = Joi.object({
 
 const productUpdatingSchema = Joi.object({
   title: Joi.string(),
-  subtitle: Joi.string(),
   description: Joi.array().items(
     Joi.alternatives().try(itemsWithTitleSchema, paragraphSchema)
   ),
-  recomendation: Joi.string(),
   category: Joi.string().custom((value, helpers) => {
     if (!isValidObjectId(value)) {
       return helpers.error('any.invalid');
@@ -80,9 +76,6 @@ const productUpdatingSchema = Joi.object({
   age: Joi.array()
     .items(Joi.string().valid(AGE['0TO3'], AGE['4TO6'], AGE['6TO12']))
     .default([]),
-  // images: Joi.array()
-  //   .items(Joi.object({ url: Joi.string() }))
-  //   .default([]),
 });
 
 module.exports = {
